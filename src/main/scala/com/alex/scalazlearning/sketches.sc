@@ -1,4 +1,3 @@
-import scalaz._
 import scalaz.std.list._
 import scalaz.syntax.bind._
 
