@@ -38,3 +38,16 @@ implicit def toMonoidOp[A: Monoid](a: A): MonoidOp[A] = new MonoidOp[A] {
 }
 
 3 |+| 10
+
+import scalaz.Scalaz._
+import scalaz._
+
+1.some | 2
+
+Option.empty | 2
+
+Option(1).getOrElse(2)
+
+(1 > 10)? 1 | 2
+
+if (1 > 10) 1 else 2
