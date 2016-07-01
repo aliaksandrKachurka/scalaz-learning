@@ -25,3 +25,16 @@ def sum[M[_]: FoldLeft, A: Monoid](xs: M[A]): A = {
 }
 
 sum(List(1, 2, 7))
+
+trait MonoidOp[A] {
+  val F: Monoid[A]
+  val value: A
+  def |+|(a2: A) = F.append(value, a2)
+}
+
+implicit def toMonoidOp[A: Monoid](a: A): MonoidOp[A] = new MonoidOp[A] {
+  val F: Monoid[A] = implicitly[Monoid[A]]
+  val value = a
+}
+
+3 |+| 10
