@@ -8,9 +8,20 @@ implicit object IntMonoid extends Monoid[Int] {
   override def zero: Int = 0
 }
 
-def sum[A: Monoid](xs: List[A]) = {
+trait FoldLeft[F[_]] {
+  def foldLeft[A, B](xs: F[A], b: B, f: (B, A) => B): B
+}
+
+object FoldLeft {
+  implicit val FoldLeftList: FoldLeft[List] = new FoldLeft[List] {
+    def foldLeft[A, B](xs: List[A], b: B, f: (B, A) => B) = xs.foldLeft(b)(f)
+  }
+}
+
+def sum[M[_]: FoldLeft, A: Monoid](xs: M[A]): A = {
   val m = implicitly[Monoid[A]]
-  xs.foldLeft(m.zero)(m.append)
+  val fl = implicitly[FoldLeft[M]]
+  fl.foldLeft(xs, m.zero, m.append)
 }
 
 sum(List(1, 2, 7))
