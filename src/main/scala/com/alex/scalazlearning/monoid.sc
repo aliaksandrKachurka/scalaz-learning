@@ -40,7 +40,6 @@ implicit def toMonoidOp[A: Monoid](a: A): MonoidOp[A] = new MonoidOp[A] {
 3 |+| 10
 
 import scalaz.Scalaz._
-import scalaz._
 
 1.some | 2
 

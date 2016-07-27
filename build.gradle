@@ -1,0 +1,21 @@
+group 'com.alex'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'scala'
+apply plugin: 'idea'
+
+repositories {
+    jcenter()
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.11.8'
+    compile 'org.scalaz:scalaz-core_2.11:7.3.0-M3'
+}
